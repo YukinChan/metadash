@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import shutil
 import glob
 import sys
 import subprocess
@@ -39,14 +40,14 @@ def do_initialize(dev=False, inst_py_dep=True, inst_node_dep=True, build_assert=
         if inst_node_dep:
             info("*** Install node packages ***")
             if dev:
-                subprocess.run(['npm', 'install'])
+                subprocess.run(['node', '--max-old-space-size=256', shutil.which('npm'), 'install'])
             else:
-                subprocess.run(['npm', 'install', '--production'])
+                subprocess.run(['node', '--max-old-space-size=256', shutil.which('npm'), 'install', '--production'])
             info("*** Install node packages Done ***")
 
         if build_assert:
             info("*** Building Asserts ***")
-            subprocess.run(['npm', 'run', 'build'])
+            subprocess.run(['node', '--max-old-space-size=512', 'metadash/build/build.js'])
             info("*** Building Asserts Done ***")
 
     except Exception as err:

@@ -38,24 +38,15 @@ module.exports = {
     rules: [
       {
         test: /metadash-plugins\.js$/,
-        loaders: [pluginLoader, 'eslint-loader'],
+        loaders: [pluginLoader],
         enforce: 'pre',
         include: [resolve('src'), resolve('test')]
       },
       {
         test: /metadash-version\.js$/,
-        loaders: [metadashVersionLoader, 'eslint-loader'],
+        loaders: [metadashVersionLoader],
         enforce: 'pre',
         include: [resolve('src'), resolve('test')]
-      },
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('plugins'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
       },
       {
         test: /\.vue$/,
